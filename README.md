@@ -85,6 +85,22 @@ Measured on synthetic modules, with act codes renumbered so a fixed table fails:
 For comparison on the same 300 bugs, twelve parallel frontier-model agents also scored
 300/300 — at **452,737 tokens and 62 s** against zero tokens and 3.8 s.
 
+## Generalisation to unseen repositories
+
+`UNSEEN.md` records an outside measurement on idioms from libraries in none of the
+repositories above — funcy-style slicing, a chunking loop, cachetools-style TTL
+arithmetic, a sortedcontainers-style bisect bound, and a diff helper.
+
+    python3 tests/test_unseen.py        # 10.3 s, no dependencies
+
+    repaired 5/5   EXACT 5/5   0 tokens
+
+That corpus also found a real defect in the example pipeline: an act that decrements a
+loop bound can make a candidate non-terminating, and the repair loop executed candidates
+with no timeout — it hung for 595 s. `repair()` now bounds every candidate
+(`CANDIDATE_TIMEOUT`), and a candidate that will not terminate is treated as a failed
+candidate.
+
 ## Honest limits
 
 **Measured on three real repositories** (cachetools, sortedcontainers, boltons; 1,150

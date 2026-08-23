@@ -23,6 +23,8 @@ import os, re, shutil, subprocess, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from fluid_router import route as router
 
+CANDIDATE_TIMEOUT = 5            # seconds; a non-terminating candidate is a failure
+
 WORKED_EXAMPLE = (0, 5)          # fault kind 0 is repaired by act 5. That is the only
                                  # mapping supplied; every other act is inferred.
 
@@ -72,7 +74,15 @@ def repair(srcdir, modname="mod.py", testname="test.py", scratch=None):
             new = lines[:]; new[i] = cand
             shutil.rmtree(os.path.join(w, "__pycache__"), ignore_errors=True)
             open(os.path.join(w, modname), "w").write("\n".join(new) + "\n")
-            if subprocess.run(["python3", "-B", testname], cwd=w,
-                              capture_output=True).returncode == 0:
+            # A candidate that will not terminate is a failed candidate. An act
+            # that decrements a loop bound can make the mutant non-terminating,
+            # so unbounded execution here can hang indefinitely.
+            try:
+                rc = subprocess.run(["python3", "-B", testname], cwd=w,
+                                    capture_output=True,
+                                    timeout=CANDIDATE_TIMEOUT).returncode
+            except subprocess.TimeoutExpired:
+                rc = 1
+            if rc == 0:
                 return "\n".join(new) + "\n", tries
     return None, tries
