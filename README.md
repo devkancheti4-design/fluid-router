@@ -112,4 +112,9 @@ candidates against the test suite. On large files that is the dominant cost.
 
 ## Licence
 
-MIT.
+**GNU Affero General Public License v3.0** (AGPL-3.0-or-later). See `LICENSE`.
+
+AGPL is copyleft and its network clause (section 13) applies: if you run a modified
+version of this software so that users interact with it over a network, you must offer
+those users the corresponding source of your modified version. If that does not suit
+your use, ask about other terms.
