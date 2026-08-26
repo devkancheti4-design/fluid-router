@@ -1,0 +1,209 @@
+[
+ {
+  "n": 2,
+  "lib": "humanize-4.16.0",
+  "op": "arith_add",
+  "repaired": true,
+  "exact": true,
+  "tries": 19,
+  "secs": 25.2
+ },
+ {
+  "n": 5,
+  "lib": "humanize-4.16.0",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 2,
+  "secs": 2.6
+ },
+ {
+  "n": 6,
+  "lib": "humanize-4.16.0",
+  "op": "cmp_strict",
+  "repaired": false,
+  "exact": false,
+  "tries": 147,
+  "secs": 93.7
+ },
+ {
+  "n": 7,
+  "lib": "humanize-4.16.0",
+  "op": "logic_flip",
+  "repaired": true,
+  "exact": true,
+  "tries": 42,
+  "secs": 50.9
+ },
+ {
+  "n": 10,
+  "lib": "inflection-0.5.1",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 11,
+  "secs": 5.2
+ },
+ {
+  "n": 11,
+  "lib": "inflection-0.5.1",
+  "op": "arith_add",
+  "repaired": true,
+  "exact": true,
+  "tries": 2,
+  "secs": 0.9
+ },
+ {
+  "n": 12,
+  "lib": "inflection-0.5.1",
+  "op": "arith_add",
+  "repaired": true,
+  "exact": true,
+  "tries": 10,
+  "secs": 3.8
+ },
+ {
+  "n": 13,
+  "lib": "inflection-0.5.1",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 6,
+  "secs": 2.5
+ },
+ {
+  "n": 14,
+  "lib": "inflection-0.5.1",
+  "op": "arith_add",
+  "repaired": true,
+  "exact": true,
+  "tries": 11,
+  "secs": 4.0
+ },
+ {
+  "n": 15,
+  "lib": "inflection-0.5.1",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 6,
+  "secs": 2.5
+ },
+ {
+  "n": 18,
+  "lib": "natsort-8.4.0",
+  "op": "bool_flip",
+  "repaired": true,
+  "exact": true,
+  "tries": 14,
+  "secs": 8.3
+ },
+ {
+  "n": 19,
+  "lib": "natsort-8.4.0",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 6,
+  "secs": 5.8
+ },
+ {
+  "n": 20,
+  "lib": "natsort-8.4.0",
+  "op": "arith_mul",
+  "repaired": true,
+  "exact": false,
+  "tries": 2,
+  "secs": 4.3
+ },
+ {
+  "n": 21,
+  "lib": "natsort-8.4.0",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 7,
+  "secs": 6.0
+ },
+ {
+  "n": 22,
+  "lib": "natsort-8.4.0",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 1,
+  "secs": 3.9
+ },
+ {
+  "n": 23,
+  "lib": "natsort-8.4.0",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 1,
+  "secs": 4.0
+ },
+ {
+  "n": 26,
+  "lib": "parse-1.22.1",
+  "op": "bool_flip",
+  "repaired": true,
+  "exact": true,
+  "tries": 2,
+  "secs": 1.4
+ },
+ {
+  "n": 27,
+  "lib": "parse-1.22.1",
+  "op": "cmp_strict",
+  "repaired": false,
+  "exact": false,
+  "tries": 7,
+  "secs": 2.9
+ },
+ {
+  "n": 28,
+  "lib": "parse-1.22.1",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 2,
+  "secs": 1.5
+ },
+ {
+  "n": 29,
+  "lib": "parse-1.22.1",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 2,
+  "secs": 1.5
+ },
+ {
+  "n": 30,
+  "lib": "parse-1.22.1",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 10,
+  "secs": 4.8
+ },
+ {
+  "n": 31,
+  "lib": "parse-1.22.1",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 2,
+  "secs": 1.5
+ },
+ {
+  "n": 36,
+  "lib": "wcwidth-0.8.2",
+  "op": "const_off",
+  "repaired": true,
+  "exact": true,
+  "tries": 1,
+  "secs": 2.0
+ }
+]
