@@ -40,24 +40,35 @@ restored the original line byte-for-byte rather than merely greening the suite:
 `and`↔`or`, `True`↔`False`) it refused all six rather than guessing. That is the
 documented behaviour in the README's Honest Limits and it held on unseen code.
 
-## Neither side can tell a real bug from a phantom
+## Without a failing test, this kernel corrupts working code
 
-Seven of the original 40 mutations landed in code no test covers. They were
-dropped from the corpus above, but what both sides did with them matters:
+Seven of the original 40 mutations landed in code no test covers, so the suite
+stayed green with the mutation in place — no oracle, no signal. They are excluded
+from the corpus above, but what each side did with them is the most important
+result in this file:
 
 ```
-  Opus 5       claimed FIXED on 7/7, spending 806,938 tokens
-               (the most expensive single run was 181,331 tokens — on a non-bug)
-  this kernel  reported success on 7/7, in 1.3-4.1 seconds each
+  Opus 5       3/7 byte-exact -- located the real mutated line and reverted it,
+               with nothing but the source to reason from
+  this kernel  0/7 -- edited an unrelated line every time, and reported success
 ```
 
-Both fabricate a repair when there is nothing to repair. The kernel's only
-stopping condition is *a test passed*, and the test was already passing. Its
-refusal behaviour is a **vocabulary** check, not a **premise** check — those are
-unrelated capabilities and it has only the first.
+The clearest case cost 181,331 tokens. The mutation was `>` → `>=` at
+`wcwidth/_width.py:296`. Opus 5 reverted exactly that line and touched nothing
+else. This kernel changed `"wcwidth.table_vs16"` to `"wcwidth.table_vs15"` at
+line 14 — a module reference 282 lines away — the suite stayed green because it
+covers neither line, and `repair()` returned success.
 
-Fix: assert the suite fails before searching, and return "no failing test —
-nothing to repair." Three lines at the top of `repair()`.
+A model degrades gracefully when the oracle is absent: it reads code and reasons
+about what looks wrong. This kernel does not degrade, it corrupts. Its only
+stopping condition is *a test passed*, and the test was already passing.
+
+Its refusal behaviour is a **vocabulary** check, not a **premise** check. Those
+are unrelated capabilities and it has only the first.
+
+**This makes `repair()` unsafe to point at a repository whose suite is green.**
+Assert a failing test before searching and return "no failing test — nothing to
+repair." Three lines, and a correctness requirement rather than a nicety.
 
 ## What a per-repository act dictionary buys
 

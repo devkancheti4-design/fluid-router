@@ -64,6 +64,24 @@ def repair(srcdir, modname="mod.py", testname="test.py", scratch=None):
     w = scratch or os.path.join(srcdir, "..", "_kw")
     shutil.rmtree(w, ignore_errors=True); os.makedirs(w)
     shutil.copy(os.path.join(srcdir, testname), os.path.join(w, testname))
+
+    # PRECONDITION: there must be a failing test. Without one the search has no
+    # oracle -- the first candidate that leaves the suite green is accepted, and
+    # on a green suite that is the FIRST CANDIDATE TRIED, on whatever line it
+    # happens to land. Measured in BENCHMARK.md: given seven faults in untested
+    # code, this returned success seven times out of seven having edited an
+    # unrelated line, once a module reference 282 lines from the fault. A
+    # frontier model recovered the real line in three of the same seven.
+    # (None, 0) means "nothing to repair", distinct from (None, tries>0) which
+    # means "searched and refused".
+    open(os.path.join(w, modname), "w").write(src)
+    try:
+        if subprocess.run(["python3", "-B", testname], cwd=w, capture_output=True,
+                          timeout=CANDIDATE_TIMEOUT).returncode == 0:
+            return None, 0
+    except subprocess.TimeoutExpired:
+        pass
+
     tries = 0
     for i, line in enumerate(lines):
         for kind in observe(line):
