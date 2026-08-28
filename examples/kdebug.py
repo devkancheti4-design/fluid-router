@@ -25,11 +25,26 @@ from fluid_router import route as router
 
 CANDIDATE_TIMEOUT = 5            # seconds; a non-terminating candidate is a failure
 
+class _Delete:
+    """Sentinel an act returns to DELETE the line rather than replace it."""
+    def __repr__(self): return "DELETE_LINE"
+DELETE_LINE = _Delete()
+
 WORKED_EXAMPLE = (0, 5)          # fault kind 0 is repaired by act 5. That is the only
                                  # mapping supplied; every other act is inferred.
 
 def observe(line):
-    """Fault kinds this line could exhibit, most-specific first."""
+    """Fault kinds this line could exhibit, MOST-SPECIFIC FIRST.
+
+    The order is load-bearing and is not something the worked example can fix.
+    `act = kind + offset` is a translation: it shifts every kind equally, so if
+    kind A is listed before kind B here, A's act is tried first for every
+    possible worked example. When a line exhibits several kinds, the generic one
+    ("contains a digit") will mask the specific one ("is a lone accumulate")
+    unless the specific kind is listed first. Measured in
+    tests/test_multiline.py: with the generic kind first, all 16 worked examples
+    produce a suite-green but wrong repair; with it last, 11 of 16 are correct.
+    """
     kinds = []
     if re.search(r"[<>]=?", line):                                   kinds.append(0)
     if re.search(r"\d", line):                                       kinds.append(1)
@@ -89,7 +104,14 @@ def repair(srcdir, modname="mod.py", testname="test.py", scratch=None):
             cand = apply_act(line, act)
             if cand == line: continue
             tries += 1
-            new = lines[:]; new[i] = cand
+            # An act may return DELETE_LINE to remove the line, or a string
+            # containing newlines to replace one line with several. Between them
+            # those cover the edit shapes a plain substitution cannot reach:
+            # a spurious line, and a missing guard. The router is untouched --
+            # it names such an act from the same single worked example.
+            new = lines[:]
+            if cand is DELETE_LINE: del new[i]
+            else:                   new[i] = cand
             shutil.rmtree(os.path.join(w, "__pycache__"), ignore_errors=True)
             open(os.path.join(w, modname), "w").write("\n".join(new) + "\n")
             # A candidate that will not terminate is a failed candidate. An act
