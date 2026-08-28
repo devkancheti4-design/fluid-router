@@ -1,0 +1,17 @@
+REAL bug fixes from the parse codebase — the recurring mistakes this project actually makes.
+
+## fix logging invocation to use local logger, not root. fixes bug #14
+   BROKEN: logging.debug('format %r -> %r' % (format, self._expression))
+   FIXED : log.debug('format %r -> %r' % (format, self._expression))
+
+## Fix for matching 0 in int conversion.
+   BROKEN: if string[0] == '0':
+   FIXED : if string[0] == '0' and len(string) > 1:
+
+## Fix findall case_sensitive (#113)
+   BROKEN: return Parser(format, extra_types=extra_types).findall(string, pos, endpos, evaluate_result=evaluate_result)
+   FIXED : return p.findall(string, pos, endpos, evaluate_result=evaluate_result)
+
+## Update parse.py
+   BROKEN: element indexes are supported (as they would make no sense.)
+   FIXED : element indexes are not supported (as they would make no sense.)

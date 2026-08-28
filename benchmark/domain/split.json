@@ -1,0 +1,490 @@
+{
+ "humanize": {
+  "seed": [
+   {
+    "repo": "humanize",
+    "sha": "3299e2e5170475882a8b8e2421931a926df5c10f",
+    "msg": "Spelling fix",
+    "src": "humanize/number.py",
+    "broken": "    some compatability with Django's intcomma, this function also accepts",
+    "fixed": "    some compatibility with Django's intcomma, this function also accepts"
+   },
+   {
+    "repo": "humanize",
+    "sha": "a178851b369e303242749b60badaef697480375a",
+    "msg": "Fix overflow issue in naturalsize with np.int32 input",
+    "src": "src/humanize/filesize.py",
+    "broken": "    ret: str = format % (base * bytes_ / unit) + s",
+    "fixed": "    ret: str = format % (base * (bytes_ / unit)) + s"
+   },
+   {
+    "repo": "humanize",
+    "sha": "41f5ed67b46b151a69f2ae037376e312174e3334",
+    "msg": "fix a bug with 3600 seconds not working, add usage to readme",
+    "src": "humanize/time.py",
+    "broken": "    elif 3600 < abs(delta.seconds) < 3600*2:",
+    "fixed": "    elif 3600 <= abs(delta.seconds) < 3600*2:"
+   },
+   {
+    "repo": "humanize",
+    "sha": "b8d9f62811ef213af3011b431198346ff1cffd9e",
+    "msg": "Fix python3 local import",
+    "src": "humanize/time.py",
+    "broken": "from i18n import ngettext, gettext as _",
+    "fixed": "from .i18n import ngettext, gettext as _"
+   },
+   {
+    "repo": "humanize",
+    "sha": "caa11fc73018bc7490687d5a790043ac4146287b",
+    "msg": "Fix markdown issue and typo",
+    "src": "src/humanize/time.py",
+    "broken": "    But if suppressed, find a unit greather than the original one that is not",
+    "fixed": "    But if suppressed, find a unit greater than the original one that is not"
+   },
+   {
+    "repo": "humanize",
+    "sha": "b1ee6875820839a59f1b6f4a5fedc7cad8883834",
+    "msg": "Fix metric(0) crash.",
+    "src": "src/humanize/number.py",
+    "broken": "    exponent = int(math.floor(math.log10(abs(value))))",
+    "fixed": "    exponent = int(math.floor(math.log10(abs(value)))) if value != 0 else 0"
+   },
+   {
+    "repo": "humanize",
+    "sha": "ae62af9c4d4dea520bdf595ca2d176407ed14e07",
+    "msg": "Fix distribution.  * translations moved inside 'humanize' dir  * local",
+    "src": "humanize/i18n.py",
+    "broken": "_DEFAULT_LOCALE_PATH = os.path.join(os.path.dirname(__file__), '..', 'locale')",
+    "fixed": "_DEFAULT_LOCALE_PATH = os.path.join(os.path.dirname(__file__), 'locale')"
+   },
+   {
+    "repo": "humanize",
+    "sha": "c94f9512c86c095080366cf1dabb576e40c94ad7",
+    "msg": "Fix typo",
+    "src": "src/humanize/time.py",
+    "broken": "            converted to int (cannot be float due to 'inf' or 'nan).",
+    "fixed": "            converted to int (cannot be float due to 'inf' or 'nan')."
+   },
+   {
+    "repo": "humanize",
+    "sha": "976484a655df046aa6849f440a4f0cd44fc4918c",
+    "msg": "Fix typo in i18n.activate() docstring (#325)",
+    "src": "src/humanize/i18n.py",
+    "broken": "            transaltion. Similar to calling ``deactivate()``.",
+    "fixed": "            translation. Similar to calling ``deactivate()``."
+   },
+   {
+    "repo": "humanize",
+    "sha": "927704b12db7af7cbebfe39722f5ea8729398470",
+    "msg": "Incorrect type in comment for 'when'",
+    "src": "src/humanize/time.py",
+    "broken": "        when (datetime.timedelta): Point in time relative to which _value_ is",
+    "fixed": "        when (datetime.datetime): Point in time relative to which _value_ is"
+   }
+  ],
+  "held": [
+   {
+    "repo": "humanize",
+    "sha": "cde0a3f63700768c16220e06e9c477e602ccfefd",
+    "msg": "Fix plural float error",
+    "src": "src/humanize/i18n.py",
+    "broken": "    return get_translation().ngettext(message, plural, num)",
+    "fixed": "    return get_translation().ngettext(message, plural, int(num))"
+   },
+   {
+    "repo": "humanize",
+    "sha": "89ea236cc53c534a8c44951cac7e381dbee41afa",
+    "msg": "Fix for alternative 'if' branch",
+    "src": "humanize/i18n.py",
+    "broken": "    return translation",
+    "fixed": "    return _TRANSLATIONS[locale]"
+   },
+   {
+    "repo": "humanize",
+    "sha": "6c1d0c7dfc87189374b5b9095bfdc97ed218a702",
+    "msg": "BUG: Use %d for year translations convert to string for intcomma after",
+    "src": "src/humanize/time.py",
+    "broken": "    return _ngettext(\"%s year\", \"%s years\", years) % intcomma(years)",
+    "fixed": "    return _ngettext(\"%d year\", \"%d years\", years).replace(\"%d\", \"%s\") % intcomma(years)"
+   },
+   {
+    "repo": "humanize",
+    "sha": "17f0780d015b3c13c5c442191c654ce241e81fc5",
+    "msg": "Fixed naturaltime ignoring the months parameter + added test cases",
+    "src": "humanize/time.py",
+    "broken": "    delta = naturaldelta(delta)",
+    "fixed": "    delta = naturaldelta(delta, months)"
+   },
+   {
+    "repo": "humanize",
+    "sha": "62361ba35cdba1b36a6fe34170128f436b0c74f6",
+    "msg": "Fix setup issue on windows with py3.3 where wrong file encoding was us",
+    "src": "setup.py",
+    "broken": "    long_description=open('README.rst').read(),",
+    "fixed": "    long_description=open('README.rst', encoding=\"utf-8\").read(),"
+   },
+   {
+    "repo": "humanize",
+    "sha": "11e62eeedb8990298c3612af82376dc2344d24f8",
+    "msg": "Fix regression in naturalsize for float",
+    "src": "src/humanize/filesize.py",
+    "broken": "        return f\"{bytes_}B\" if gnu else f\"{bytes_} Bytes\"",
+    "fixed": "        return f\"{int(bytes_)}B\" if gnu else f\"{int(bytes_)} Bytes\""
+   },
+   {
+    "repo": "humanize",
+    "sha": "d4f7f998a48581843fbbb597565d225c4a37c446",
+    "msg": "Python 3.6 invalid escape sequence deprecation fixes",
+    "src": "humanize/number.py",
+    "broken": "    new = re.sub(\"^(-?\\d+)(\\d{3})\", '\\g<1>,\\g<2>', orig)",
+    "fixed": "    new = re.sub(r\"^(-?\\d+)(\\d{3})\", r'\\g<1>,\\g<2>', orig)"
+   },
+   {
+    "repo": "humanize",
+    "sha": "e5a3976c5a053ae681ec388308d95065e4e35498",
+    "msg": "metric: fix precision format",
+    "src": "src/humanize/number.py",
+    "broken": "    value_ = format(value, \".%if\" % (precision - (exponent % 3) - 1))",
+    "fixed": "    value_ = format(value, \".%if\" % max(0, precision - (exponent % 3) - 1))"
+   },
+   {
+    "repo": "humanize",
+    "sha": "6a4726978a90aa535ff59ebc07cc212769780ef0",
+    "msg": "Fix docstring formatting",
+    "src": "src/humanize/number.py",
+    "broken": "        ``pycon",
+    "fixed": "        ```pycon"
+   }
+  ]
+ },
+ "parse": {
+  "seed": [
+   {
+    "repo": "parse",
+    "sha": "1e71cd62eef18d490c68d35e2a0f99bfea2fc4bc",
+    "msg": "fix logging invocation to use local logger, not root. fixes bug #14",
+    "src": "parse.py",
+    "broken": "        logging.debug('format %r -> %r' % (format, self._expression))",
+    "fixed": "        log.debug('format %r -> %r' % (format, self._expression))"
+   },
+   {
+    "repo": "parse",
+    "sha": "d0fcf16bf42e53f5065fb9556cab13e5a4d93532",
+    "msg": "Fix for matching 0 in int conversion.",
+    "src": "parse.py",
+    "broken": "        if string[0] == '0':",
+    "fixed": "        if string[0] == '0' and len(string) > 1:"
+   },
+   {
+    "repo": "parse",
+    "sha": "19689cf5b4e0b025821be2e59e0bff0ab5977361",
+    "msg": "Fix findall case_sensitive (#113)",
+    "src": "parse.py",
+    "broken": "    return Parser(format, extra_types=extra_types).findall(string, pos, endpos, evaluate_result=evaluate_result)",
+    "fixed": "    return p.findall(string, pos, endpos, evaluate_result=evaluate_result)"
+   },
+   {
+    "repo": "parse",
+    "sha": "aae834bd0a5695a8fc0d644d5b54aa3059fd0669",
+    "msg": "Update parse.py",
+    "src": "parse.py",
+    "broken": "element indexes are supported (as they would make no sense.)",
+    "fixed": "element indexes are not supported (as they would make no sense.)"
+   }
+  ],
+  "held": [
+   {
+    "repo": "parse",
+    "sha": "71b443f4de2e9c82e117f935e347a1ab7fefdee1",
+    "msg": "prep for 1.22 release (#226)",
+    "src": "parse/__init__.py",
+    "broken": "__version__ = \"1.21.1\"",
+    "fixed": "__version__ = \"1.22.0\""
+   },
+   {
+    "repo": "parse",
+    "sha": "124cd7426b07e84ebf8e124254a194bec2cb1ab5",
+    "msg": "Clarify error message on invalid format spec",
+    "src": "parse.py",
+    "broken": "        raise ValueError('type %r not recognised' % type)",
+    "fixed": "        raise ValueError('format spec %r not recognised' % type)"
+   },
+   {
+    "repo": "parse",
+    "sha": "ba6803d57179a4b026c8ed51d970156653153b62",
+    "msg": "Fix microsecond precision loss in timestamp parsing",
+    "src": "parse.py",
+    "broken": "                u = int(float(\".\" + u) * 1000000)",
+    "fixed": "                u = int(u.ljust(6, \"0\")[:6])"
+   },
+   {
+    "repo": "parse",
+    "sha": "e96903ebd50008a89cc46aa0d42fdbff1c23a279",
+    "msg": "Update parse.py",
+    "src": "parse.py",
+    "broken": "Or find all the occurrances of some pattern in a string:",
+    "fixed": "Or find all the occurrences of some pattern in a string:"
+   }
+  ]
+ },
+ "inflect": {
+  "seed": [
+   {
+    "repo": "inflect",
+    "sha": "9b76e821a13ae617b396084c1706981ec8bc6a52",
+    "msg": "Fixed encoding issue in setup.py on Python 3",
+    "src": "setup.py",
+    "broken": "readme = open(readme_path).read()",
+    "fixed": "readme = open(readme_path, 'rb').read().decode('utf-8')"
+   },
+   {
+    "repo": "inflect",
+    "sha": "e5f18f0fe4174ec2a866f7983a1dde22a0dc120d",
+    "msg": "fix sign with numwords wantlist",
+    "src": "inflect.py",
+    "broken": "                return [sign].append(numchunks)",
+    "fixed": "                numchunks = [sign] + numchunks"
+   },
+   {
+    "repo": "inflect",
+    "sha": "e2d02d2d7c65de4b5e8478434c373cbd8a194ceb",
+    "msg": "Apply a minimal fix to allow the test cases to pass",
+    "src": "inflect/__init__.py",
+    "broken": "    def ordinal(self, num: Union[int, Word]) -> str:  # noqa: C901",
+    "fixed": "    def ordinal(self, num: Word) -> str:"
+   },
+   {
+    "repo": "inflect",
+    "sha": "b94d7ebe02cdf1873534dfbfed7b154d1a5f3b95",
+    "msg": "add some of the perl tests. fix ordinal bug",
+    "src": "inflect.py",
+    "broken": "        if match(r\"\\d\", num):",
+    "fixed": "        if match(r\"\\d\", str(num)):"
+   },
+   {
+    "repo": "inflect",
+    "sha": "4ef894d919f4412fbf53dc009f93d400a10f76dd",
+    "msg": "fixed setup.py according to readme file rename",
+    "src": "setup.py",
+    "broken": "      long_description = open('README.txt').read()",
+    "fixed": "      long_description = open('README.rst').read()"
+   },
+   {
+    "repo": "inflect",
+    "sha": "924695c2de9d1dcfde0c1bd4c4cb054e32fd8273",
+    "msg": "fix a/an issue 136 as indicated by tonywu7",
+    "src": "inflect/__init__.py",
+    "broken": "(?! FJO | [HLMNS]Y.  | RY[EO] | SQU",
+    "fixed": "^(?! FJO | [HLMNS]Y.  | RY[EO] | SQU"
+   }
+  ],
+  "held": [
+   {
+    "repo": "inflect",
+    "sha": "b2f97a5bec2719dd162675d36de24f8693c55b2e",
+    "msg": "Fix: a dishonest",
+    "src": "inflect.py",
+    "broken": "                  (r\"(%s)\" % A_explicit_an, \"an\"),",
+    "fixed": "                  (r\"^(%s)\" % A_explicit_an, \"an\"),"
+   },
+   {
+    "repo": "inflect",
+    "sha": "8200ad36c566a339279ea2a70e36f43e4e41fe6a",
+    "msg": "Revert \"Remove extra noqa. Fixes #177.\"",
+    "src": "inflect/__init__.py",
+    "broken": "    @validate_arguments(config=dict(arbitrary_types_allowed=True))",
+    "fixed": "    @validate_arguments(config=dict(arbitrary_types_allowed=True))  # noqa: C901"
+   },
+   {
+    "repo": "inflect",
+    "sha": "498619bf7a658d127c8be1e7e7e465b69dcf6800",
+    "msg": "Handle a single apostrophe more gracefully",
+    "src": "inflect/__init__.py",
+    "broken": "ENDS_WITH_APOSTROPHE_S = re.compile(r\"^(.*)'s?$\")",
+    "fixed": "ENDS_WITH_APOSTROPHE_S = re.compile(r\"^(.+)'s?$\")"
+   },
+   {
+    "repo": "inflect",
+    "sha": "36269c1111add4c247d83389b874005fc3526994",
+    "msg": "Restore missing comma. Fixes #43.",
+    "src": "inflect.py",
+    "broken": "pl_v_oes_oe_endings_size5 = \"shoes\"",
+    "fixed": "pl_v_oes_oe_endings_size5 = \"shoes\","
+   },
+   {
+    "repo": "inflect",
+    "sha": "5c8c6af7b116eabd012a4e4d4d2c683365a4e5b7",
+    "msg": "Remove extra noqa. Fixes #177.",
+    "src": "inflect/__init__.py",
+    "broken": "    @validate_arguments(config=dict(arbitrary_types_allowed=True))  # noqa: C901",
+    "fixed": "    @validate_arguments(config=dict(arbitrary_types_allowed=True))"
+   },
+   {
+    "repo": "inflect",
+    "sha": "1c187ad0cf50fbc14626f63cb669a9ec5949012f",
+    "msg": "List sidebars to avoid errors looking for template 't'",
+    "src": "docs/conf.py",
+    "broken": "html_sidebars = {'index': 'tidelift-sidebar.html'}",
+    "fixed": "html_sidebars = {'index': ['tidelift-sidebar.html']}"
+   }
+  ]
+ },
+ "funcy": {
+  "seed": [
+   {
+    "repo": "funcy",
+    "sha": "2b1e80755f58502b29e6705f8cede7d22902b70e",
+    "msg": "Fixed description rst parsing on PyPI by removing Build Status",
+    "src": "setup.py",
+    "broken": "    long_description=open('README.rst').read(),",
+    "fixed": "    long_description=open('README.rst').read().replace('|Build Status|', '', 1),"
+   },
+   {
+    "repo": "funcy",
+    "sha": "6c111987f25eb8371e33b71f8b76e2975c30617d",
+    "msg": "Fix @throttle() for timedelta arg",
+    "src": "funcy/flow.py",
+    "broken": "        period = timedelta.total_seconds()",
+    "fixed": "        period = period.total_seconds()"
+   },
+   {
+    "repo": "funcy",
+    "sha": "87edf9b2e67fc5d28fe1b5c20199bb35cadb40ec",
+    "msg": "Fixed a bug in @retry",
+    "src": "funcy/flow.py",
+    "broken": "        @wraps",
+    "fixed": "        @wraps(func)"
+   },
+   {
+    "repo": "funcy",
+    "sha": "0d31183937028eb7be28ad59a7a86116661e1191",
+    "msg": "Fixed interpose()",
+    "src": "funcy/seqs.py",
+    "broken": "    return drop(1, izip(repeat(sep), seq))",
+    "fixed": "    return drop(1, interleave(repeat(sep), seq))"
+   },
+   {
+    "repo": "funcy",
+    "sha": "77e4c5ee4f25fbcd760232e11da6df9f9a128322",
+    "msg": "Fix iffy() default argument",
+    "src": "funcy/funcs.py",
+    "broken": "        return iffy(bool, pred)",
+    "fixed": "        return iffy(bool, pred, default)"
+   },
+   {
+    "repo": "funcy",
+    "sha": "592b6eaa3b004885ed0f4f1cbde81ffef3d91c87",
+    "msg": "Fix @cache with mixed positional and keywords args",
+    "src": "funcy/calc.py",
+    "broken": "            result = func(*key, **kwargs)",
+    "fixed": "            result = func(*args, **kwargs)"
+   },
+   {
+    "repo": "funcy",
+    "sha": "4f35db6f00d89c548f401220379c200b30a5293a",
+    "msg": "Minor text fixes",
+    "src": "funcy/calc.py",
+    "broken": "            memory[object()] = None # prevert continuos memory refilling",
+    "fixed": "            memory[object()] = None # prevent continuos memory refilling"
+   },
+   {
+    "repo": "funcy",
+    "sha": "e5090591930fffdde1688fa086274b7b0e6ccc06",
+    "msg": "Fix get_spec() for old-style classes with no constructor",
+    "src": "funcy/_inspect.py",
+    "broken": "            return set(), 0, 0",
+    "fixed": "            return Spec(max_n=0, names=set(), req_n=0, req_names=set(), kw=False)"
+   },
+   {
+    "repo": "funcy",
+    "sha": "19e9617383cd48dfbc4074dab11df9157ece98b0",
+    "msg": "fix join() raises TypeError when joining bytes (#169)",
+    "src": "funcy/colls.py",
+    "broken": "        return ''.join(colls)",
+    "fixed": "        return cls().join(colls)"
+   },
+   {
+    "repo": "funcy",
+    "sha": "7729f8da225742c3eb9c9ab5f939efa0e6e6aea6",
+    "msg": "Fix i?partition_by() for non-boolean extended mapper",
+    "src": "funcy/seqs.py",
+    "broken": "    f = make_pred(f)",
+    "fixed": "    f = make_func(f)"
+   }
+  ],
+  "held": [
+   {
+    "repo": "funcy",
+    "sha": "1ca93b72b3da4d5996697c54214613b94190b134",
+    "msg": "Fix simple typo: accesssed -> accessed",
+    "src": "funcy/objects.py",
+    "broken": "    Rewrites itself when any attribute is accesssed.",
+    "fixed": "    Rewrites itself when any attribute is accessed."
+   },
+   {
+    "repo": "funcy",
+    "sha": "6b92d03fcfb88b6bae77c3b939fabfb981510e57",
+    "msg": "Fixed i?partition() and i?chunks() with xrange()",
+    "src": "funcy/seqs.py",
+    "broken": "    if isinstance(seq, Sequence):",
+    "fixed": "    if isinstance(seq, Sequence) and not isinstance(seq, xrange):"
+   },
+   {
+    "repo": "funcy",
+    "sha": "da4040a5d93b8d59157279d45e92281eb569a3f5",
+    "msg": "Fix @decorator with more than one default",
+    "src": "funcy/decorators.py",
+    "broken": "        defaults = dict((argnames[-1-i], v) for i, v in enumerate(func.__defaults__))",
+    "fixed": "        defaults = dict(zip(argnames[-len(func.__defaults__):], func.__defaults__))"
+   },
+   {
+    "repo": "funcy",
+    "sha": "8dd2ea523670a24afd492fdf74f41ee716dcd46e",
+    "msg": "Changed function sematics of dict to be more strict.",
+    "src": "funcy/funcmakers.py",
+    "broken": "        return f.get",
+    "fixed": "        return f.__getitem__"
+   },
+   {
+    "repo": "funcy",
+    "sha": "d5391d6ebcb3534068ad5c5b8a42e736ad2dd83b",
+    "msg": "Fix last in seqs",
+    "src": "funcy/seqs.py",
+    "broken": "    for item in iter(l):",
+    "fixed": "    for item in iter(seq):"
+   },
+   {
+    "repo": "funcy",
+    "sha": "d891999dbcfa6a41a09f3e1d9914def703d074fa",
+    "msg": "Fix some inspect issues",
+    "src": "funcy/_inspect.py",
+    "broken": "                    % getattr(func, '__qualname__', None) or getattr(func, '__name__', func))",
+    "fixed": "                    % (getattr(func, '__qualname__', None) or getattr(func, '__name__', func)))"
+   },
+   {
+    "repo": "funcy",
+    "sha": "264fdebd264abdbdd354fceed0a55cb616471966",
+    "msg": "Fixed @retry in python 3",
+    "src": "funcy/flow.py",
+    "broken": "from .cross import imap",
+    "fixed": "from .cross import imap, xrange"
+   },
+   {
+    "repo": "funcy",
+    "sha": "a96b449ee08d7355805e4c6037e9782e74241ff7",
+    "msg": "Make `@cache.invalidate()` idempotent",
+    "src": "funcy/calc.py",
+    "broken": "            cache.pop(key_func(*args, **kwargs))",
+    "fixed": "            cache.pop(key_func(*args, **kwargs), None)"
+   },
+   {
+    "repo": "funcy",
+    "sha": "54ed07a6a52acad6f409a828f544c37ace003902",
+    "msg": "Fix bug with flatten() follow argument",
+    "src": "funcy/seqs.py",
+    "broken": "            for sub in iflatten(item, is_seqcont):",
+    "fixed": "            for sub in iflatten(item, follow):"
+   }
+  ]
+ }
+}

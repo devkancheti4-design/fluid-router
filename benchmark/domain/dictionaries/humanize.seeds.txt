@@ -1,0 +1,41 @@
+REAL bug fixes from the humanize codebase — the recurring mistakes this project actually makes.
+
+## Spelling fix
+   BROKEN: some compatability with Django's intcomma, this function also accepts
+   FIXED : some compatibility with Django's intcomma, this function also accepts
+
+## Fix overflow issue in naturalsize with np.int32 input
+   BROKEN: ret: str = format % (base * bytes_ / unit) + s
+   FIXED : ret: str = format % (base * (bytes_ / unit)) + s
+
+## fix a bug with 3600 seconds not working, add usage to readme
+   BROKEN: elif 3600 < abs(delta.seconds) < 3600*2:
+   FIXED : elif 3600 <= abs(delta.seconds) < 3600*2:
+
+## Fix python3 local import
+   BROKEN: from i18n import ngettext, gettext as _
+   FIXED : from .i18n import ngettext, gettext as _
+
+## Fix markdown issue and typo
+   BROKEN: But if suppressed, find a unit greather than the original one that is not
+   FIXED : But if suppressed, find a unit greater than the original one that is not
+
+## Fix metric(0) crash.
+   BROKEN: exponent = int(math.floor(math.log10(abs(value))))
+   FIXED : exponent = int(math.floor(math.log10(abs(value)))) if value != 0 else 0
+
+## Fix distribution.  * translations moved inside 'humanize' dir  * local
+   BROKEN: _DEFAULT_LOCALE_PATH = os.path.join(os.path.dirname(__file__), '..', 'locale')
+   FIXED : _DEFAULT_LOCALE_PATH = os.path.join(os.path.dirname(__file__), 'locale')
+
+## Fix typo
+   BROKEN: converted to int (cannot be float due to 'inf' or 'nan).
+   FIXED : converted to int (cannot be float due to 'inf' or 'nan').
+
+## Fix typo in i18n.activate() docstring (#325)
+   BROKEN: transaltion. Similar to calling ``deactivate()``.
+   FIXED : translation. Similar to calling ``deactivate()``.
+
+## Incorrect type in comment for 'when'
+   BROKEN: when (datetime.timedelta): Point in time relative to which _value_ is
+   FIXED : when (datetime.datetime): Point in time relative to which _value_ is

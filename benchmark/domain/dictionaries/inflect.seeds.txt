@@ -1,0 +1,25 @@
+REAL bug fixes from the inflect codebase — the recurring mistakes this project actually makes.
+
+## Fixed encoding issue in setup.py on Python 3
+   BROKEN: readme = open(readme_path).read()
+   FIXED : readme = open(readme_path, 'rb').read().decode('utf-8')
+
+## fix sign with numwords wantlist
+   BROKEN: return [sign].append(numchunks)
+   FIXED : numchunks = [sign] + numchunks
+
+## Apply a minimal fix to allow the test cases to pass
+   BROKEN: def ordinal(self, num: Union[int, Word]) -> str:  # noqa: C901
+   FIXED : def ordinal(self, num: Word) -> str:
+
+## add some of the perl tests. fix ordinal bug
+   BROKEN: if match(r"\d", num):
+   FIXED : if match(r"\d", str(num)):
+
+## fixed setup.py according to readme file rename
+   BROKEN: long_description = open('README.txt').read()
+   FIXED : long_description = open('README.rst').read()
+
+## fix a/an issue 136 as indicated by tonywu7
+   BROKEN: (?! FJO | [HLMNS]Y.  | RY[EO] | SQU
+   FIXED : ^(?! FJO | [HLMNS]Y.  | RY[EO] | SQU

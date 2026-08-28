@@ -169,3 +169,29 @@ The five libraries measured (`humanize`, `inflection`, `natsort`, `parse`,
 are not vendored here — `benchmark/pick.py` downloads them. `benchmark/bugs.json`
 records single mutated lines from those packages solely to identify the injected
 faults.
+
+## Real bugs, and a dictionary per codebase
+
+Everything above uses mechanically-injected mutations. `benchmark/domain/`
+measures real bug-fix commits mined from four projects' git history, with a
+dictionary trained on each project's *own* earlier bugs and scored on its later
+ones — never seen, never synthesised.
+
+```
+  16%   single-token substitutions -- their share of all real one-line fixes
+  41%   one general dictionary across four unrelated codebases
+  62%   one dictionary per codebase, trained on its own bug history   (13/21)
+```
+
+Specialising to a single codebase is worth +21 points on real bugs. That is the
+argument for a per-team dictionary and it holds.
+
+It is a ceiling, not a repair rate: the test asks whether the maintainer's actual
+fixed line appears anywhere among the candidates, with the buggy line supplied.
+Median candidates per line is 13,708, so retrieval remains the open problem —
+the same one the localisation section above measures at 152x.
+
+It is also not 100% and cannot be. The misses need information absent from the
+broken line: a symbol defined elsewhere, a different algorithm, a domain word, a
+version number. Enlarging the dictionary raises the candidate count, not the
+ceiling. See `benchmark/domain/README.md`.

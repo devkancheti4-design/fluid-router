@@ -1,0 +1,41 @@
+REAL bug fixes from the funcy codebase — the recurring mistakes this project actually makes.
+
+## Fixed description rst parsing on PyPI by removing Build Status
+   BROKEN: long_description=open('README.rst').read(),
+   FIXED : long_description=open('README.rst').read().replace('|Build Status|', '', 1),
+
+## Fix @throttle() for timedelta arg
+   BROKEN: period = timedelta.total_seconds()
+   FIXED : period = period.total_seconds()
+
+## Fixed a bug in @retry
+   BROKEN: @wraps
+   FIXED : @wraps(func)
+
+## Fixed interpose()
+   BROKEN: return drop(1, izip(repeat(sep), seq))
+   FIXED : return drop(1, interleave(repeat(sep), seq))
+
+## Fix iffy() default argument
+   BROKEN: return iffy(bool, pred)
+   FIXED : return iffy(bool, pred, default)
+
+## Fix @cache with mixed positional and keywords args
+   BROKEN: result = func(*key, **kwargs)
+   FIXED : result = func(*args, **kwargs)
+
+## Minor text fixes
+   BROKEN: memory[object()] = None # prevert continuos memory refilling
+   FIXED : memory[object()] = None # prevent continuos memory refilling
+
+## Fix get_spec() for old-style classes with no constructor
+   BROKEN: return set(), 0, 0
+   FIXED : return Spec(max_n=0, names=set(), req_n=0, req_names=set(), kw=False)
+
+## fix join() raises TypeError when joining bytes (#169)
+   BROKEN: return ''.join(colls)
+   FIXED : return cls().join(colls)
+
+## Fix i?partition_by() for non-boolean extended mapper
+   BROKEN: f = make_pred(f)
+   FIXED : f = make_func(f)
